@@ -185,4 +185,10 @@ class _API(object):
 class API(_API):
 
     def get(self, method, timeout=DEFAULT_TIMEOUT, **kwargs):
+        version = kwargs.pop('v', None)
+        if version:
+            kwargs['v'] = float(version)
+        else:
+            kwargs['v'] = float(3.0)
+
         return self._get(method, timeout, **kwargs)
